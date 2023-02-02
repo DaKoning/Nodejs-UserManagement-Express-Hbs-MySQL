@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const User = require('../../models/user-model');
 
 // Connection Pool
 let connection = mysql.createConnection({
@@ -10,8 +11,7 @@ let connection = mysql.createConnection({
 
 // View Users
 exports.view = (req, res) => {
-  // User the connection
-  connection.query('SELECT * FROM user WHERE status = "active"', (err, rows) => {
+  User.view((err, rows) => {
     // When done with the connection, release it
     if (!err) {
       let removedUser = req.query.removed;
